@@ -176,4 +176,5 @@ a:focus-visible {
     font-size: 1rem;
     width: auto;
     height: auto;
+    cursor: pointer;
 }
