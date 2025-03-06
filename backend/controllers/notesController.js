@@ -5,19 +5,38 @@ const User = require('../models/User');
 // @desc    Get all notes
 // @route   GET /notes
 // @access  Private
+// const getAllNotes = asyncHandler(async (req, res) => {
+// 	// Get all notes from the database
+// 	const notes = await Note.find().lean();
+
+// 	// If no notes
+// 	if (!notes?.length) {
+// 		return res.status(400).json({ message: 'Not notes found' });
+// 	}
+
+// 	const notesWithUser = await Promise.all(
+// 		notes.map(async (note) => {
+// 			const user = await User.findById(note.user).lean().exec();
+// 			return { ...notes, user: user.username };
+// 		})
+// 	);
+
+// 	res.json(notesWithUser);
+// });
+
 const getAllNotes = asyncHandler(async (req, res) => {
 	// Get all notes from the database
 	const notes = await Note.find().lean();
 
-	// If no notes
+	// If no notes found
 	if (!notes?.length) {
-		return res.status(400).json({ message: 'Not notes found' });
+		return res.status(400).json({ message: 'No notes found' });
 	}
 
 	const notesWithUser = await Promise.all(
 		notes.map(async (note) => {
 			const user = await User.findById(note.user).lean().exec();
-			return { ...notes, user: user.username };
+			return { ...note, user: user?.username || 'Unknown User' }; // ✅ CORRECTED!
 		})
 	);
 
@@ -31,7 +50,7 @@ const createNewNote = asyncHandler(async (req, res) => {
 	const { user, title, text } = req.body;
 
 	// Confirm data
-	if (!title || !content || !text) {
+	if (!user || !title || !text) {
 		res.status(400);
 		throw new Error('All fields are required');
 	}
