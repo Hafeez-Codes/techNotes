@@ -87,7 +87,7 @@ const updateNote = asyncHandler(async (req, res) => {
 	}
 
 	// Confirm note exists
-	const note = await Note.findById(req.params.id);
+	const note = await Note.findById(req.body.id);
 
 	if (!note) {
 		res.status(404);
