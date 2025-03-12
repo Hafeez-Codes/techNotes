@@ -14,8 +14,10 @@ import Prefetch from './Features/auth/Prefetch'
 import PersistLogin from './Features/auth/PersistLogin'
 import RequireAuth from './Features/auth/RequireAuth'
 import { ROLES } from './config/roles'
+import useTitle from './hooks/useTitle'
 
 function App() {
+    useTitle('Dan D. Repairs')
 
     return (
         <Routes>
