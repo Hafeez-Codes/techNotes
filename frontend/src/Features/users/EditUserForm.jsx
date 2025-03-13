@@ -40,7 +40,7 @@ const EditUserForm = ({ user }) => {
     }, [password])
 
     useEffect(() => {
-        console.log(isSuccess)
+        // console.log(isSuccess)
         if (isSuccess || isDelSuccess) {
             setUsername('')
             setPassword('')
