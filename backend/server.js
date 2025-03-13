@@ -24,7 +24,7 @@ app.use(
 	cors({
 		origin: 'https://technotes-vgjc.onrender.com',
 		methods: ['GET', 'POST', 'PUT', 'DELETE'],
-		allowedHeaders: ['Content-Type', 'Authorization'],
+		allowedHeaders: ['Content-Type', 'authorization', 'Authorization'],
 	})
 );
 
